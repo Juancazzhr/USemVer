@@ -11,10 +11,10 @@
     "url": "https://juancazzhr.com"
   },
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.6"
+    "com.unity.textmeshpro": "3.0.9"
   },
-  "changelogUrl": "https://juancazzhr.com",
-  "documentationUrl": "https://juancazzhr.com",
+  "changelogUrl": "",
+  "documentationUrl": "",
   "hideInEditor": false,
   "keywords": [
     "semver",
@@ -25,7 +25,7 @@
   ],
   "category": "Tools",
   "license": "MIT",
-  "licensesUrl": "https://opensource.org/licenses/MIT",
+  "licensesUrl": "",
   "samples": [
     {
       "displayName": "Start Sample",
