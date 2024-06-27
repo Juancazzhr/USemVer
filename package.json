@@ -1,0 +1,36 @@
+{
+  "name": "juancazzhr.tools.usemver",
+  "version": "1.0.0",
+  "displayName": "USemVer",
+  "description": "U SemVer is a tool to manage your semantic versioning.",
+  "unity": "2021.3",
+  "unityRelease": "33f1",
+  "author": {
+    "name": "Juancazz",
+    "email": "juancazzhr@gmail.com",
+    "url": "https://juancazzhr.com"
+  },
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "changelogUrl": "https://juancazzhr.com",
+  "documentationUrl": "https://juancazzhr.com",
+  "hideInEditor": false,
+  "keywords": [
+    "semver",
+    "versioning",
+    "version",
+    "semantic",
+    "semantic versioning"
+  ],
+  "category": "Tools",
+  "license": "MIT",
+  "licensesUrl": "https://opensource.org/licenses/MIT",
+  "samples": [
+    {
+      "displayName": "Start Sample",
+      "description": "Short start sample to get you going.",
+      "path": "Samples~/SampleStart"
+    }
+  ]
+}

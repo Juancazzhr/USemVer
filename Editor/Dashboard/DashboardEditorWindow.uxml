@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/juancazzhr.tools.usemver/Editor/Dashboard/DashboardEditorWindow.uss?fileID=7433441132597879392&amp;guid=f83eae9bd6d202d4698bfaa1bac3de0d&amp;type=3#DashboardEditorWindow" />
+    <ui:VisualElement name="body">
+        <ui:VisualElement name="main" style="margin-bottom: 64px;">
+            <ui:VisualElement name="header">
+                <ui:Label tabindex="-1" text="Product Version" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label__h1" class="content__title" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label__major" class="version-part" />
+                <ui:Label tabindex="-1" text="." parse-escape-sequences="true" display-tooltip-when-elided="true" name="label_dot" class="dot" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label__minor" class="version-part" />
+                <ui:Label tabindex="-1" text="." parse-escape-sequences="true" display-tooltip-when-elided="true" name="label__dot" class="dot" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="label__patch" class="version-part" />
+            </ui:VisualElement>
+            <ui:DropdownField label="Type" name="dd__version-part" />
+        </ui:VisualElement>
+        <ui:VisualElement name="commands" style="flex-direction: row;">
+            <ui:Button text="Increment" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn__increment" />
+            <ui:Button text="Reset" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn__reset" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

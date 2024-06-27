@@ -1,0 +1,121 @@
+#body {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    -unity-text-align: middle-left;
+}
+
+#main {
+}
+
+#header {
+    flex-direction: row;
+    -unity-text-align: middle-left;
+    margin: 0 0 8px;
+    margin-bottom: 16px;
+}
+
+#label__h1 {
+    margin: 0 8px 0 0;
+    padding: 0;
+    font-size: 24px;
+    -unity-font-style: bold;
+}
+
+#dd__version-part {
+    padding: 0;
+    flex-direction: row;
+    width: 120px;
+    margin: 0;
+    -unity-font: resource('Fonts/Geist/Geist-Regular');
+    -unity-font-definition: resource('Fonts/Geist/UTK/Geist-Regular SDF');
+}
+
+#dd__version-part > Label {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    align-items: auto;
+    min-width: 40px;
+    min-height: 0;
+    margin-right: 8px;
+    -unity-font-style: bold;
+    font-size: 16px;
+}
+
+#dd__version-part > VisualElement {
+    margin: 0;
+    padding: 4px 8px;
+    flex-shrink: 0;
+    font-size: 14px;
+}
+
+#commands {
+    margin: 0;
+}
+
+#btn__increment {
+    margin: 0;
+    padding: 8px 0;
+    width: 24%;
+    font-size: 14px;
+    margin-right: 8px;
+    -unity-font-style: bold;
+}
+
+#btn__reset {
+    margin: 0;
+    padding: 8px 0;
+    width: 24%;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: rgb(199, 67, 67);
+    -unity-font-style: bold;
+}
+
+.version-part {
+    flex-direction: row;
+    -unity-text-align: middle-left;
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    cursor: initial;
+    min-width: 4px;
+    opacity: 0.4;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+
+.version-part:hover {
+    flex-direction: row;
+    -unity-text-align: middle-left;
+    padding: 0;
+    margin: 0;
+    cursor: initial;
+    min-width: 4px;
+    color: rgb(0, 140, 255);
+    opacity: 1;
+    font-size: 24px;
+}
+
+.version-part-selected {
+    flex-direction: row;
+    -unity-text-align: middle-left;
+    padding: 0;
+    margin: 0;
+    cursor: initial;
+    min-width: 4px;
+    color: rgb(255, 255, 255);
+    opacity: 1;
+    font-size: 24px;
+    -unity-font-style: bold;
+}
+
+.dot {
+    flex-direction: row;
+    -unity-text-align: middle-left;
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    cursor: initial;
+}
