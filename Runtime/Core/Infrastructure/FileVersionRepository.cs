@@ -16,18 +16,23 @@ namespace Juancazzhr.Tools.USemVer.Core.Infrastructure
 
         public Version SaveVersion(Version version)
         {
-            var completePath = Path.Combine(_Path, _FILE_NAME);
-            var exists = Directory.Exists(completePath);
-            if (exists == false)
+            var pathToSave = Path.Combine(_Path, _FILE_NAME);
+            var pathExist = Directory.Exists(pathToSave);
+            if (pathExist == false)
                 Directory.CreateDirectory(_Path);
 
-            File.WriteAllText(completePath, version.ToString());
+            File.WriteAllText(pathToSave, version.ToString());
             return version;
         }
 
         public Version GetVersion()
         {
-            return new Version(1, 0, 0);
+            var pathToRead = Path.Combine(_Path, _FILE_NAME);
+            var pathExist = File.Exists(pathToRead);
+            return pathExist == false ? ZeroVersion() : DefaultVersion();
         }
+
+        private static Version ZeroVersion() => new(0, 0, 0);
+        private static Version DefaultVersion() => new(1, 0, 0);
     }
 }

@@ -28,9 +28,9 @@
   "licensesUrl": "",
   "samples": [
     {
-      "displayName": "Start Sample",
-      "description": "Short start sample to get you going.",
-      "path": "Samples~/SampleStart"
+      "displayName": "Essentials",
+      "description": "Essential samples and resources to get you going.",
+      "path": "Samples~/Essentials"
     }
   ]
 }

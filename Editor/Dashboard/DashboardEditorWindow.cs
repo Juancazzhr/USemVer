@@ -31,7 +31,7 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
             _Mediator = new Mediator(new FileVersionRepository(localPath),
                                      new FileVersionRepository(buildPath),
                                      new ProjectVersionRepository());
-            
+
             _IncrementerSystem = new IncrementerSystem(ProductInfo.GetVersion());
         }
 
@@ -43,7 +43,7 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
         [MenuItem("Tools/Juancazz/USemVer (Dashboard)")]
         public static void ShowWindow()
         {
-            var size = new Vector2(400, 200);
+            var size = new Vector2(240, 280);
 
             var wnd = GetWindow<DashboardEditorWindow>();
             wnd.titleContent = new GUIContent("USemVer (Dashboard)");
@@ -137,10 +137,11 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
             void Reset()
             {
                 var alertTitle = "(USemVer) Reset Version";
-                var alertMessage = $"Are you sure you want to reset the version from {_IncrementerSystem.Version} to 1.0.0?";
+                var alertMessage =
+                    $"Are you sure you want to reset the version from {_IncrementerSystem.Version} to 1.0.0?";
                 var alertResponse = EditorUtility.DisplayDialog(alertTitle, alertMessage, "Yes", "No");
                 if (alertResponse == false) return;
-                
+
                 var newVersion = _IncrementerSystem.Reset();
                 _Mediator.SaveVersion(newVersion);
                 _LabelMajor.text = newVersion.Major.ToString();
