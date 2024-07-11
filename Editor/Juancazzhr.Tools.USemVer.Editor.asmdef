@@ -1,6 +1,6 @@
 {
     "name": "Juancazzhr.Tools.USemVer.Editor",
-    "rootNamespace": "Juancazzhr.Tools.USemVer",
+    "rootNamespace": "Juancazzhr.Tools.USemVer.Editor",
     "references": [
         "GUID:8325bfc73a614e9408f4c2e52a4f5056"
     ],

@@ -8,15 +8,22 @@ namespace Juancazzhr.Tools.USemVer.Component
     [DefaultExecutionOrder(-1)]
     public class VersionChecker : MonoBehaviour
     {
+        public enum Status
+        {
+            Updated,
+            Outdated,
+            Error
+        }
+        
         /// <summary>
         /// Struct to store the result of the version check.
         /// </summary>
         public struct TestResult
         {
             /// <summary>
-            /// If the version is already updated.
+            /// Status of the version check.
             /// </summary>
-            public bool IsUpdated;
+            public Status Status;
 
             /// <summary>
             /// The local version.
@@ -38,13 +45,13 @@ namespace Juancazzhr.Tools.USemVer.Component
             /// </summary>
             public string Message;
 
-            public void Deconstruct(out bool alreadyUpdated,
+            public void Deconstruct(out Status alreadyUpdated,
                                     out Version localVersion,
                                     out Version remoteVersion,
                                     out Guid buildGuid,
                                     out string message)
             {
-                alreadyUpdated = IsUpdated;
+                alreadyUpdated = Status;
                 localVersion = LocalVersion;
                 remoteVersion = RemoteVersion;
                 buildGuid = BuildGuid;
@@ -76,7 +83,7 @@ namespace Juancazzhr.Tools.USemVer.Component
         private async void Start()
         {
             var remoteVer = await remoteVersionChecker.GetRemoteVersion();
-            var localVer = localVersionChecker.GetLocalVersion();
+            var localVer = LocalVersionChecker.GetLocalVersion();
 
             var message = "";
             var alreadyUpdated = false;
@@ -86,9 +93,9 @@ namespace Juancazzhr.Tools.USemVer.Component
                 message = remoteVer.Error;
                 onCheckVersion?.Invoke(new TestResult
                 {
-                    IsUpdated = false,
+                    Status = Status.Error,
                     LocalVersion = localVer,
-                    RemoteVersion = null,
+                    RemoteVersion = remoteVer.Value,
                     BuildGuid = Guid.Parse(Application.buildGUID),
                     Message = message
                 });
@@ -97,19 +104,19 @@ namespace Juancazzhr.Tools.USemVer.Component
 
             if (localVer == remoteVer.Value)
             {
-                message = "The version is up to date.";
+                message = "Tienes la última versión.";
                 alreadyUpdated = true;
             }
             else if (localVer < remoteVer.Value)
-                message = "There is a new version available.";
+                message = "Hay una nueva versión disponible.";
             else if (localVer > remoteVer.Value)
-                message = "The local version is newer than the remote version.";
+                message = "La versión local es más reciente que la versión remota.";
             else if (localVer == null || remoteVer.Value == null)
-                message = "There was an error checking the version.";
+                message = "No se pudo obtener la versión.";
 
             onCheckVersion?.Invoke(new TestResult
             {
-                IsUpdated = alreadyUpdated,
+                Status = alreadyUpdated ? Status.Updated : Status.Outdated,
                 LocalVersion = localVer,
                 RemoteVersion = remoteVer.Value,
                 BuildGuid = Guid.Parse(Application.buildGUID),
