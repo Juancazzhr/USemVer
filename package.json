@@ -1,6 +1,6 @@
 {
   "name": "juancazzhr.tools.usemver",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "displayName": "USemVer",
   "description": "U SemVer is a tool to manage your semantic versioning.",
   "unity": "2021.3",
