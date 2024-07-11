@@ -6,6 +6,13 @@ namespace Juancazzhr.Tools.USemVer.Editor.Core.Infrastructure
 {
     public class ProjectVersionRepository : IVersionRepository
     {
+        private const string _DEFAULT_VERSION = "0.0.0";
+        
+        public ProjectVersionRepository(Version version = null)
+        {
+            PlayerSettings.bundleVersion = version?.ToString() ?? _DEFAULT_VERSION;
+        }
+        
         public Version SaveVersion(Version version)
         {
             PlayerSettings.bundleVersion = version.ToString();

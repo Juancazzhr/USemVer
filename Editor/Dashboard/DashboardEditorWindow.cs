@@ -13,8 +13,8 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
     {
         [SerializeField] private VisualTreeAsset visualTreeAsset;
 
-        private IncrementerSystem _IncrementerSystem;
-        private Mediator _Mediator;
+        private SemVerSystem semVerSystem;
+        private SemVerMediator semVerMediator;
 
         private Button _BtnIncrement;
         private Button _BtnReset;
@@ -26,18 +26,20 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
 
         private void OnEnable()
         {
+            var appVer = AppVer.GetVersion();
+
             const string localPath = "Assets/Resources/";
             const string buildPath = "Builds/";
-            _Mediator = new Mediator(new FileVersionRepository(localPath),
+            semVerMediator = new SemVerMediator(new FileVersionRepository(localPath),
                                      new FileVersionRepository(buildPath),
-                                     new ProjectVersionRepository());
+                                     new ProjectVersionRepository(appVer));
 
-            _IncrementerSystem = new IncrementerSystem(ProductInfo.GetVersion());
+            semVerSystem = SemVerSystem.Instance;
         }
 
         private void OnDisable()
         {
-            _IncrementerSystem = null;
+            semVerSystem = default;
         }
 
         [MenuItem("Tools/Juancazz/USemVer (Dashboard)")]
@@ -70,7 +72,7 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
             _LabelPatch = contentFromUxml.Q<Label>("version-part__patch");
 
             // Set initial values
-            var currentVersion = _IncrementerSystem.Version;
+            var currentVersion = semVerSystem.Version;
             _LabelMajor.text = currentVersion.Major.ToString();
             _LabelMinor.text = currentVersion.Minor.ToString();
             _LabelPatch.text = currentVersion.Build.ToString();
@@ -114,7 +116,7 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
             _LabelPatch.RegisterCallback<ClickEvent>(ev => dropdownVerType.value = "PATCH");
 
             _BtnIncrement.clicked += Increment;
-            _BtnReset.clicked += () => { Reset(); };
+            _BtnReset.clicked += Reset;
             _BtnOnlineRef.clicked += () => { Application.OpenURL("https://semver.org/"); };
             return;
 
@@ -127,8 +129,8 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
                     "PATCH" => VersionPart.Patch,
                     _       => VersionPart.Patch
                 };
-                var newVersion = _IncrementerSystem.Increment(verType);
-                _Mediator.SaveVersion(newVersion);
+                var newVersion = semVerSystem.Increment(verType);
+                semVerMediator.SaveVersion(newVersion);
                 _LabelMajor.text = newVersion.Major.ToString();
                 _LabelMinor.text = newVersion.Minor.ToString();
                 _LabelPatch.text = newVersion.Build.ToString();
@@ -138,12 +140,12 @@ namespace Juancazzhr.Tools.USemVer.Editor.Dashboard
             {
                 var alertTitle = "(USemVer) Reset Version";
                 var alertMessage =
-                    $"Are you sure you want to reset the version from {_IncrementerSystem.Version} to 1.0.0?";
+                    $"Are you sure you want to reset the version from {semVerSystem.Version} to {SemVerSystem.DefaultVersion}?";
                 var alertResponse = EditorUtility.DisplayDialog(alertTitle, alertMessage, "Yes", "No");
                 if (alertResponse == false) return;
 
-                var newVersion = _IncrementerSystem.Reset();
-                _Mediator.SaveVersion(newVersion);
+                var newVersion = semVerSystem.Reset();
+                semVerMediator.SaveVersion(newVersion);
                 _LabelMajor.text = newVersion.Major.ToString();
                 _LabelMinor.text = newVersion.Minor.ToString();
                 _LabelPatch.text = newVersion.Build.ToString();

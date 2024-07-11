@@ -2,19 +2,26 @@
 using Cysharp.Threading.Tasks;
 using Juancazzhr.Tools.USemVer.Common;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Networking;
 
 namespace Juancazzhr.Tools.USemVer.Component
 {
-    public class RemoteVersionChecker : MonoBehaviour
+    internal class RemoteVersionChecker : MonoBehaviour
     {
-        [SerializeField] private string host = "http://localhost:8080";
-        [SerializeField] private string path = $"/udearroba/creacion_digital/server/version.txt";
+        [SerializeField] private string host = string.Empty;
+        [SerializeField] private string path = string.Empty;
+
+        private void OnValidate()
+        {
+            Assert.IsFalse(string.IsNullOrEmpty(host), $"'{nameof(host)}' is required");
+            Assert.IsFalse(string.IsNullOrEmpty(path), $"'{nameof(path)}' is required");
+        }
 
         internal async UniTask<Result<Version>> GetRemoteVersion()
         {
             Version remoteVersion;
-            var endpoint = new Uri($"{host}{path}");
+            var endpoint = new Uri($"{host}{path}", UriKind.RelativeOrAbsolute);
             using var webRequest = UnityWebRequest.Get(endpoint);
 
             try
@@ -33,7 +40,7 @@ namespace Juancazzhr.Tools.USemVer.Component
 
         private static Version ParseVersion(string version)
         {
-            return Version.TryParse(version, out var parsedVersion) ? parsedVersion : new Version(1, 0, 0);
+            return Version.TryParse(version, out var parsedVersion) ? parsedVersion : new Version(0, 0, 0);
         }
     }
 }
